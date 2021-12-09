@@ -37,5 +37,5 @@ jobs:
     - run: gcc final.c -o final
     - run: bash ./intermediate.sh *.txt
       shell: cmd
-    - run: ./final.exe *.txt
+    - run: .\final.exe *.txt
       shell: cmd
