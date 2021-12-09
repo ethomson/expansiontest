@@ -17,6 +17,8 @@ jobs:
     - run: gcc final.c -o final
     - run: bash ./intermediate.sh *.txt
       shell: bash
+    - run: ./final.exe *.txt
+      shell: bash
 
   windows_pwsh:
     runs-on: windows-latest
@@ -24,6 +26,8 @@ jobs:
     - uses: actions/checkout@v2
     - run: gcc final.c -o final
     - run: bash ./intermediate.sh *.txt
+      shell: pwsh
+    - run: ./final.exe *.txt
       shell: pwsh
 
   windows_cmd:
@@ -33,4 +37,5 @@ jobs:
     - run: gcc final.c -o final
     - run: bash ./intermediate.sh *.txt
       shell: cmd
-    
+    - run: ./final.exe *.txt
+      shell: cmd
