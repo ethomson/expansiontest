@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  windows_bash:
+  windows_gcc_bash:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -20,7 +20,7 @@ jobs:
     - run: ./final.exe *.txt
       shell: bash
 
-  windows_pwsh:
+  windows_gcc_pwsh:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -30,11 +30,45 @@ jobs:
     - run: ./final.exe *.txt
       shell: pwsh
 
-  windows_cmd:
+  windows_gcc_cmd:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - run: gcc final.c -o final
+    - run: bash ./intermediate.sh
+      shell: cmd
+    - run: |
+        .\final.exe *.txt
+      shell: cmd
+
+  windows_gcc_bash:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: microsoft/setup-msbuild@v1.1
+    - run: cl final.c
+    - run: bash ./intermediate.sh
+      shell: bash
+    - run: ./final.exe *.txt
+      shell: bash
+
+  windows_gcc_pwsh:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: microsoft/setup-msbuild@v1.1
+    - run: cl final.c
+    - run: bash ./intermediate.sh
+      shell: pwsh
+    - run: ./final.exe *.txt
+      shell: pwsh
+
+  windows_gcc_cmd:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: microsoft/setup-msbuild@v1.1
+    - run: cl final.c
     - run: bash ./intermediate.sh
       shell: cmd
     - run: |
