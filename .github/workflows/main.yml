@@ -45,7 +45,9 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: microsoft/setup-msbuild@v1.1
+    - uses: egor-tensin/vs-shell@v2
+      with:
+        arch: x64
     - run: cl final.c
     - run: bash ./intermediate.sh
       shell: bash
@@ -56,7 +58,9 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: microsoft/setup-msbuild@v1.1
+    - uses: egor-tensin/vs-shell@v2
+      with:
+        arch: x64
     - run: cl final.c
     - run: bash ./intermediate.sh
       shell: pwsh
@@ -67,7 +71,9 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: microsoft/setup-msbuild@v1.1
+    - uses: egor-tensin/vs-shell@v2
+      with:
+        arch: x64
     - run: cl final.c
     - run: bash ./intermediate.sh
       shell: cmd
