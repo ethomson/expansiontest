@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: gcc final.c -o final
-    - run: bash ./intermediate.sh *.txt
+    - run: bash ./intermediate.sh
       shell: bash
     - run: ./final.exe *.txt
       shell: bash
@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: gcc final.c -o final
-    - run: bash ./intermediate.sh *.txt
+    - run: bash ./intermediate.sh
       shell: pwsh
     - run: ./final.exe *.txt
       shell: pwsh
@@ -35,9 +35,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: gcc final.c -o final
-    - run: bash ./intermediate.sh *.txt
+    - run: bash ./intermediate.sh
       shell: cmd
     - run: |
-        rm baz.txt
         .\final.exe *.txt
       shell: cmd
