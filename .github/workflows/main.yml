@@ -1,0 +1,26 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ 'windows-latest', 'ubuntu-latest' ]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: cl final.c
+        if: ${{ matrix.os == 'windows-latest' }}
+      - run: gcc final.c -o final
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+      - run: |
+          bash ./intermediate.sh *.txt
