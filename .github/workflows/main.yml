@@ -10,17 +10,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        os: [ 'windows-latest', 'ubuntu-latest' ]
-    runs-on: ${{ matrix.os }}
-
+  linux:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1.1
       - run: cl final.c
-        if: ${{ matrix.os == 'windows-latest' }}
+      - run: bash ./intermediate.sh *.txt
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
       - run: gcc final.c -o final
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-      - run: |
-          bash ./intermediate.sh *.txt
+      - run: bash ./intermediate.sh *.txt
