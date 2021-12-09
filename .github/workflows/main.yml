@@ -10,18 +10,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
-    strategy:
-      matrix:
-        os: [ 'ubuntu-latest', 'windows-latest' ]
-        shell: [ 'bash', 'pwsh', 'cmd' ]
-        exclude:
-        - os: ubuntu-latest
-          shell: cmd
-        
-    runs-on: ${{ matrix.os }}
+  windows_bash:
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: gcc final.c -o final
-      - run: bash ./intermediate.sh *.txt
-        shell: ${{ matrix.shell }}
+    - uses: actions/checkout@v2
+    - run: gcc final.c -o final
+    - run: bash ./intermediate.sh *.txt
+      shell: bash
+
+  windows_pwsh:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: gcc final.c -o final
+    - run: bash ./intermediate.sh *.txt
+      shell: pwsh
+
+  windows_cmd:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: gcc final.c -o final
+    - run: bash ./intermediate.sh *.txt
+      shell: cmd
+    
